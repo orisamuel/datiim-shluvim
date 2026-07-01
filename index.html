@@ -148,7 +148,7 @@ footer a{color:var(--green-d); font-weight:600}
       <span class="kicker">🧶 מבוסס על חוק דתיים שלובים</span>
       <h1>וואלאק, כמה אתם כבר <span class="hl">שלובים</span> עם השכונה?</h1>
       <p class="lead">כולם יודעים: בין כל שני דתיים יש לכל היותר מכר אחד משותף. אז לפני שקונים דירה ב<b>הירוקה בעופרים</b> — בואו נבדוק כמה אנשים פה כבר מכירים אתכם בעצם.</p>
-      <p class="lead">כמה שאלות קטנות, ואנחנו מחשבים לכם את <b>מדד השלובוּת</b> — מדויק עד הוורט האחרון בקידוש.</p>
+      <p class="lead">כמה שאלות קטנות, ואנחנו מחשבים לכם את <b>מדד השלובוּת</b> — מדויק עד הקוגל האחרון בקידוש.</p>
       <button class="btn" onclick="show('s-gender')">יאללה, בואו נבדוק 🌻</button>
     </section>
 
@@ -203,45 +203,68 @@ footer a{color:var(--green-d); font-weight:600}
 
 <script>
 /* ---------- question bank (gender-aware) ---------- */
+function isArmy(a){ return a.mil_type && a.mil_type.indexOf('צבא')>-1; }
+
 function buildQuestions(g){
   const man = g==='m';
-  return [
+  const list = [
     { key:'tichon', emoji:'📖',
       q: man ? 'באיזו ישיבה תיכונית היית?' : 'באיזו אולפנה היית?',
       hint:'שנות הנעורים, החולצה הלבנה והשירים בהיכל',
       ph: man ? 'למשל: ישיבה תיכונית נתיב מאיר' : 'למשל: אולפנת צביה',
-      chips: man ? ['נתיב מאיר','אמי״ת','אור עציון','מקור חיים','נחלים'] : ['צביה','אמי״ת','להב״ה','אור תורה','סגולה'] },
+      chips: man ? ['נתיב מאיר','אמי״ת','אור עציון','מקור חיים','נחלים','לא למדתי בישיבה תיכונית']
+                 : ['צביה','אמי״ת','להב״ה','אור תורה','סגולה','לא הייתי באולפנה'] },
 
     { key:'gvoha', emoji:'🎓',
       q: man ? 'ואיפה היית בהסדר / בישיבה גבוהה?' : 'ובאיזו מדרשה היית?',
       hint: man ? 'שם באמת נהיית מי שאתה (ואיפה שכחת סוודר)' : 'שנת המדרשה ששינתה לך את הראש',
       ph: man ? 'למשל: ישיבת הר עציון' : 'למשל: מדרשת עין הנצי״ב',
-      chips: man ? ['הר עציון','מרכז הרב','כרם ביבנה','שעלבים','עתניאל','ירוחם'] : ['עין הנצי״ב','מגדל עוז','נשמת','לינדנבאום','אורות'] },
+      chips: man ? ['הר עציון','מרכז הרב','כרם ביבנה','שעלבים','עתניאל','ירוחם','לא הייתי בישיבה']
+                 : ['עין הנצי״ב','מגדל עוז','נשמת','לינדנבאום','אורות','לא הייתי במדרשה'] },
 
     { key:'shevet', emoji:'🧡',
       q:'איזה שבט בבני עקיבא היית?',
       hint:'גם אם לא הגעת כל שבת — זה נספר',
       ph:'למשל: שבט מבוא',
-      chips:['נצח','מבוא','לפיד','מגל','אורים','יובלים'] },
+      chips:['נצח','מבוא','לפיד','מגל','אורים','יובלים','לא הייתי בבני עקיבא'] },
 
     { key:'mechina', emoji:'🎒',
       q: man ? 'מכינה / שנת שירות?' : 'שנת שירות / התנדבות?',
-      hint:'השנה שעליה אתם מספרים בכל ארוחת שבת',
+      hint: man ? 'השנה שעליה אתה מספר בכל ארוחת שבת' : 'השנה שאחרי האולפנה, לפני הצבא/השירות',
       ph: man ? 'למשל: מכינת עלי' : 'למשל: שנת שירות בעיר',
-      chips: man ? ['עלי','בית יתיר','שנת שירות בעיר','גרעין תורני','לא, ישר צבא'] : ['שנת שירות','גרעין תורני','בת שירות','לא עשיתי'] },
-
-    { key:'spouse', emoji:'💍',
-      q: man ? 'איפה אשתך עשתה שירות?' : 'איפה בעלך היה בשירות?',
-      hint: man ? 'שירות לאומי / צבא — הכל נחשב' : 'הסדר / צבא — ספרו איפה',
-      ph: man ? 'למשל: ש״ל בבית חולים שערי צדק' : 'למשל: ישיבת הסדר + גולני',
-      chips: man ? ['בית חולים','פנימייה','בית ספר','אולפנה','חינוך מיוחד','עדיין רווק'] : ['ישיבת הסדר','מכינה + צבא','גולני','שריון','חיל האוויר','עדיין רווקה'] },
-
-    { key:'spring', emoji:'💦',
-      q:'באיזה מעיין בצפון היית לאחרונה?',
-      hint:'נו, הזה עם המים הקרים, הפיתות והתמונה על סלע',
-      ph:'למשל: עין תינה / הבניאס',
-      chips:['עין תינה','הבניאס','נחל עמוד','עין קשתות','נחל דישון','מי כמוני זוכר'] },
+      chips: man ? ['עלי','בית יתיר','שנת שירות בעיר','גרעין תורני','לא עשיתי']
+                 : ['שנת שירות','גרעין תורני','בת שירות','לא עשיתי'] },
   ];
+
+  if(man){
+    list.push({ key:'army', emoji:'🎖️',
+      q:'ואיפה היית בצבא?',
+      hint:'הפלוגה, הבסיס והחברים לחיים',
+      ph:'למשל: גולני / חיל האוויר',
+      chips:['גולני','צנחנים','גבעתי','נחל','שריון','חיל האוויר','כפיר','הנדסה קרבית','מודיעין','לא הייתי בצבא'] });
+  } else {
+    list.push({ key:'mil_type', emoji:'🎖️',
+      q:'עשית צבא או שירות לאומי?',
+      hint:'רק כדי שנדע איזו שאלה לשאול אחר כך',
+      ph:'צבא / שירות לאומי',
+      chips:['שירות לאומי','צבא','לא עשיתי'] });
+    list.push({ key:'mil_where', emoji:'📍',
+      q:(a)=> isArmy(a) ? 'ואיפה היית בצבא?' : 'ואיפה עשית שירות לאומי?',
+      hint:(a)=> isArmy(a) ? 'החברות מהמ״כ ומהבסיס' : 'המקום שבו התנדבת שנה־שנתיים',
+      ph:(a)=> isArmy(a) ? 'למשל: מודיעין / חינוך' : 'למשל: בית חולים / פנימייה',
+      chips:(a)=> isArmy(a) ? ['מודיעין','חינוך','מדריכה בבקו״ם','חיל האוויר','לא זוכרת']
+                            : ['בית חולים','פנימייה','בית ספר','חינוך מיוחד','עמותה','לא זוכרת'],
+      skipIf:(a)=> !a.mil_type || a.mil_type.trim().indexOf('לא')===0 });
+  }
+
+  list.push({ key:'spouse', emoji:'💍',
+    q: man ? 'איפה אשתך עשתה שירות?' : 'איפה בעלך היה בשירות?',
+    hint: man ? 'שירות לאומי / צבא — הכל נחשב' : 'הסדר / צבא — ספרו איפה',
+    ph: man ? 'למשל: ש״ל בבית חולים שערי צדק' : 'למשל: ישיבת הסדר + גולני',
+    chips: man ? ['בית חולים','פנימייה','בית ספר','אולפנה','חינוך מיוחד','עדיין רווק']
+               : ['ישיבת הסדר','מכינה + צבא','גולני','שריון','חיל האוויר','עדיין רווקה'] });
+
+  return list;
 }
 
 let Q=[], step=0, gender='m';
@@ -256,23 +279,29 @@ function startQuiz(g){
   gender=g; Q=buildQuestions(g); step=0;
   show('s-q'); render();
 }
+function val(f){ return typeof f==='function' ? f(answers) : f; }
+function isLast(){ // last question that won't be skipped given current answers
+  for(let i=Q.length-1;i>step;i--){ if(!(Q[i].skipIf && Q[i].skipIf(answers))) return false; }
+  return true;
+}
 function render(){
   const q=Q[step];
   document.getElementById('bar').style.width=(step/Q.length*100)+'%';
   document.getElementById('qcount').textContent='שאלה '+(step+1)+' מתוך '+Q.length;
-  document.getElementById('qtext').innerHTML=q.q+' <span class="emoji">'+q.emoji+'</span>';
-  document.getElementById('qhint').textContent=q.hint;
+  document.getElementById('qtext').innerHTML=val(q.q)+' <span class="emoji">'+q.emoji+'</span>';
+  document.getElementById('qhint').textContent=val(q.hint);
   const inp=document.getElementById('qinput');
-  inp.value=answers[q.key]||''; inp.placeholder=q.ph; inp.focus();
+  inp.value=answers[q.key]||''; inp.placeholder=val(q.ph); inp.focus();
   const chips=document.getElementById('qchips'); chips.innerHTML='';
-  q.chips.forEach(c=>{ const b=document.createElement('button');
+  val(q.chips).forEach(c=>{ const b=document.createElement('button');
     b.className='chip'; b.textContent=c; b.onclick=()=>{inp.value=c; inp.focus();}; chips.appendChild(b); });
-  document.getElementById('qnext').textContent = step===Q.length-1 ? 'גלו את מדד השלובוּת 🔮' : 'הבא ←';
+  document.getElementById('qnext').textContent = isLast() ? 'גלו את מדד השלובוּת 🔮' : 'הבא ←';
 }
 function next(){
   const q=Q[step];
   answers[q.key]=document.getElementById('qinput').value.trim()||'סוד';
   step++;
+  while(step<Q.length && Q[step].skipIf && Q[step].skipIf(answers)){ answers[Q[step].key]='דילג'; step++; }
   if(step<Q.length) render();
   else{ document.getElementById('bar').style.width='100%'; calculate(); }
 }
@@ -302,41 +331,49 @@ function calculate(){
   setTimeout(()=>{ clearInterval(iv); reveal(); }, LOADS.length*620+250);
 }
 
+function isNone(v){ return !v || v==='סוד' || v==='דילג' || v.trim().indexOf('לא')===0; }
+
 function reveal(){
   const a=answers, man=gender==='m';
   const rnd=seedRand(Object.values(a).join('|')||'שלוב');
   const items=[];
 
-  items.push({ ic:'📖', n:pick(rnd,2,5),
+  if(!isNone(a.tichon)) items.push({ ic:'📖', n:pick(rnd,2,5),
     t: man?'שהיו איתך בישיבה התיכונית ':'שהיו איתך באולפנה ',
     ref:a.tichon, tail: man?' — ואחד מהם עדיין חייב לך מחברת':' — ואחת מהן עדיין חייבת לך מחברת' });
 
-  items.push({ ic:'🎓', n:pick(rnd,3,6),
+  if(!isNone(a.gvoha)) items.push({ ic:'🎓', n:pick(rnd,3,6),
     t: man?'שלמדו איתך בישיבה ':'שהיו איתך במדרשה ',
-    ref:a.gvoha, tail:' — ואתם עדיין מדברים על אותה שבת ישיבה' });
+    ref:a.gvoha, tail: man?' — ואתם עדיין מדברים על אותה שבת ישיבה':' — ואתן עדיין מדברות על אותה שבת' });
 
-  items.push({ ic:'🧡', n:pick(rnd,3,6),
+  if(!isNone(a.shevet)) items.push({ ic:'🧡', n:pick(rnd,3,6),
     t:'משבט ', ref:a.shevet, tail:' בבני עקיבא — גדלתם על אותם מחנות קיץ' });
 
-  if(a.mechina && a.mechina!=='סוד' && !has(a.mechina,'לא')){
-    items.push({ ic:'🎒', n:pick(rnd,2,4),
-      t: man?'מהמכינה / ש״ש שלך ':'מהשירות / ההתנדבות שלך ',
-      ref:a.mechina, tail:', ועדיין בקבוצת הוואטסאפ הפעילה מ־2011' });
-  }
+  if(!isNone(a.mechina)) items.push({ ic:'🎒', n:pick(rnd,2,4),
+    t: man?'מהמכינה / ש״ש שלך — ':'מהשנה שלך — ',
+    ref:a.mechina, tail:', ועדיין בקבוצת הוואטסאפ הפעילה מ־2011' });
+
+  if(man && !isNone(a.army)) items.push({ ic:'🎖️', n:pick(rnd,2,5),
+    t:'ששירתו איתך ב', ref:a.army, tail:' — עדיין שולחים סטיקרים בקבוצת הפלוגה' });
+
+  if(!man && !isNone(a.mil_where)) items.push({ ic:'🎖️', n:pick(rnd,2,5),
+    t: isArmy(a)?'ששירתו איתך בצבא ב':'שעשו איתך שירות לאומי ב',
+    ref:a.mil_where, tail:' — ונשארתן חברות עד היום' });
 
   if(has(a.spouse,'רווק')){
     items.push({ ic:'💘', n:pick(rnd,2,4),
       t:'שכבר יש להם רעיון לשידוך בשבילכם', ref:'',
       tail: man?'. "רגע, אתה לא מכיר את..."':'. "רגע, את לא מכירה את..."' });
-  }else{
+  }else if(!isNone(a.spouse)){
     items.push({ ic:'💍', n:1,
       t: man?'שעשה שירות בדיוק איפה שאשתך — ':'שהיה בשירות בדיוק איפה שבעלך — ',
       ref:a.spouse, tail: man?'. "רגע, אתן לא מכירות?!"':'. "רגע, אתם לא מכירים?!"' });
   }
 
-  // המעיין — הגאג המקורי
+  // המעיין — הגאג הקבוע (מופיע רק כאן, לא כשאלה)
   items.push({ ic:'💦', n:pick(rnd,3,4),
-    t:'שפגשת פעם במעיין ', ref:a.spring, tail:' בצפון. (לגבי המעיין אנחנו לא באמת יודעים — אבל זה מן הסתם נכון 😅)' });
+    t:'שפגשת פעם באיזה מעיין בצפון', ref:'',
+    tail:'. (לגבי המעיין אנחנו לא באמת יודעים — אבל זה מן הסתם נכון)' });
 
   const total=items.reduce((s,x)=>s+x.n,0);
 
