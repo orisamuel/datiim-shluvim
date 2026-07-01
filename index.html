@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>דתיים שלובים · הירוקה בעופרים</title>
-<meta name="description" content="בדיקת חוק דתיים שלובים: כמה אתה כבר שלוב עם השכונה הכי דתל״שית בישראל?">
+<meta name="description" content="בדיקת חוק דתיים שלובים: כמה אתה כבר שלוב עם השכונה הכי דתית בישראל?">
 <meta property="og:title" content="וואלאק אתה שלוב לגמרי · הירוקה בעופרים">
-<meta property="og:description" content="ענה על כמה שאלות וגלה לכמה תושבים בהירוקה בעופרים אתה כבר מחובר. חוק דתיים שלובים לא טועה.">
+<meta property="og:description" content="ענו על כמה שאלות וגלו לכמה תושבים בהירוקה בעופרים אתם כבר מחוברים. חוק דתיים שלובים לא טועה.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,13 +34,11 @@ body{
 }
 .wrap{flex:1; width:100%; max-width:640px; margin:0 auto; padding:22px 20px 40px; display:flex; flex-direction:column}
 
-/* header brand */
 .brand{display:flex; align-items:center; gap:10px; justify-content:center; margin:6px 0 2px}
 .brand .dot{font-size:26px; filter:drop-shadow(0 3px 5px rgba(0,0,0,.15))}
 .brand b{font-weight:800; letter-spacing:.2px; color:var(--green-d)}
 .brand small{color:var(--ink-soft); font-weight:500}
 
-/* card */
 .card{
   background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow);
   padding:30px 26px; margin-top:18px; position:relative; overflow:hidden;
@@ -49,7 +47,6 @@ body{
 .card::before{content:""; position:absolute; inset:0 0 auto 0; height:7px;
   background:linear-gradient(90deg,var(--green),var(--leaf),var(--gold))}
 
-/* screens */
 .screen{display:none; animation:pop .45s cubic-bezier(.2,.9,.3,1.2)}
 .screen.active{display:block}
 @keyframes pop{from{opacity:0; transform:translateY(14px) scale(.98)}to{opacity:1; transform:none}}
@@ -60,7 +57,6 @@ h1 .hl{background:linear-gradient(180deg,transparent 60%, #ffe08a 60%); padding:
 .kicker{display:inline-block; background:var(--sand); color:var(--green-d); font-weight:700;
   font-size:13px; padding:6px 13px; border-radius:999px; margin-bottom:14px}
 
-/* progress */
 .prog{height:9px; background:var(--sand); border-radius:999px; overflow:hidden; margin-bottom:6px}
 .prog>i{display:block; height:100%; width:0; border-radius:999px;
   background:linear-gradient(90deg,var(--green),var(--leaf)); transition:width .5s cubic-bezier(.3,1,.3,1)}
@@ -82,6 +78,14 @@ input::placeholder{color:#b3ab92}
   font-size:14px; font-weight:600; padding:9px 14px; border-radius:999px; cursor:pointer; transition:.15s}
 .chip:hover{background:var(--leaf); color:#fff; border-color:var(--leaf); transform:translateY(-2px)}
 
+/* gender picker */
+.gender{display:flex; gap:14px; margin-top:20px}
+.gender button{flex:1; font-family:inherit; cursor:pointer; background:#f7fbf2; border:2px solid #d8e6cc;
+  border-radius:20px; padding:22px 10px; transition:.18s; color:var(--green-d)}
+.gender button:hover{transform:translateY(-3px); border-color:var(--leaf); box-shadow:0 12px 26px rgba(47,125,52,.2)}
+.gender button .g-em{font-size:44px; display:block; margin-bottom:6px}
+.gender button b{font-size:18px; font-weight:800}
+
 .btn{
   display:inline-flex; align-items:center; justify-content:center; gap:8px;
   width:100%; font-family:inherit; font-size:18px; font-weight:800; cursor:pointer;
@@ -93,16 +97,13 @@ input::placeholder{color:#b3ab92}
 .btn:active{transform:translateY(0)}
 .btn.ghost{background:#fff; color:var(--green-d); border:2px solid #d8e6cc; box-shadow:none; margin-top:12px}
 .btn.ghost:hover{background:#f2f7ec}
-.btn:disabled{opacity:.45; cursor:not-allowed; transform:none; box-shadow:none}
 
-/* loading */
 .loader{text-align:center; padding:20px 0}
 .spin{width:74px; height:74px; margin:0 auto 22px; border-radius:50%;
   border:7px solid var(--sand); border-top-color:var(--green); animation:sp 1s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
 .loadmsg{font-size:19px; font-weight:700; color:var(--green-d); min-height:26px}
 
-/* result */
 .big{font-size:clamp(30px,9vw,46px); font-weight:900; color:var(--green-d); line-height:1.05; text-align:center; margin-bottom:4px}
 .sub{text-align:center; color:var(--ink-soft); font-size:16px; margin-bottom:22px}
 .score{
@@ -121,7 +122,6 @@ input::placeholder{color:#b3ab92}
   font-size:24px; background:#fff; box-shadow:0 4px 10px rgba(0,0,0,.06)}
 .conn li .tx{flex:1; font-size:15.5px; line-height:1.4}
 .conn li .tx .n{font-weight:900; color:var(--green); font-size:19px}
-.conn li .tx small{color:var(--ink-soft); display:block; font-size:13px; margin-top:1px}
 @keyframes slide{to{opacity:1; transform:none}}
 
 .verdict{background:linear-gradient(180deg,#fff8e5,#fff2cf); border:1.5px solid #f0d98a;
@@ -132,7 +132,6 @@ footer{margin-top:26px; text-align:center; color:var(--ink-soft); font-size:13px
 footer a{color:var(--green-d); font-weight:600}
 .disc{font-size:12px; color:#9a9481; margin-top:10px}
 
-/* confetti */
 #cf{position:fixed; inset:0; pointer-events:none; z-index:50}
 
 @media(max-width:420px){ .card{padding:24px 18px} .score{width:160px;height:160px} .score b{font-size:52px} }
@@ -147,10 +146,21 @@ footer a{color:var(--green-d); font-weight:600}
     <!-- INTRO -->
     <section class="screen active" id="s-intro">
       <span class="kicker">🧶 מבוסס על חוק דתיים שלובים</span>
-      <h1>וואלאק, כמה אתה כבר <span class="hl">שלוב</span> עם השכונה?</h1>
-      <p class="lead">כולם יודעים: בין כל שני דתל״שים יש לכל היותר מכר אחד משותף. אז לפני שאתה קונה דירה ב<b>הירוקה בעופרים</b> — בוא נבדוק כמה אנשים פה כבר מכירים אותך בעצם.</p>
-      <p class="lead">כמה שאלות קטנות, ואנחנו מחשבים לך את <b>מדד השלובוּת</b> מדויק עד ה־וורט האחרון בקידוש.</p>
-      <button class="btn" onclick="go(1)">יאללה, תבדוק אותי 🌻</button>
+      <h1>וואלאק, כמה אתם כבר <span class="hl">שלובים</span> עם השכונה?</h1>
+      <p class="lead">כולם יודעים: בין כל שני דתיים יש לכל היותר מכר אחד משותף. אז לפני שקונים דירה ב<b>הירוקה בעופרים</b> — בואו נבדוק כמה אנשים פה כבר מכירים אתכם בעצם.</p>
+      <p class="lead">כמה שאלות קטנות, ואנחנו מחשבים לכם את <b>מדד השלובוּת</b> מדויק עד הווֹרט האחרון בקידוש.</p>
+      <button class="btn" onclick="show('s-gender')">יאללה, בדקו אותי 🌻</button>
+    </section>
+
+    <!-- GENDER -->
+    <section class="screen" id="s-gender">
+      <span class="kicker">רגע לפני שמתחילים</span>
+      <div class="q">מי ממלא את הטופס? 🙂</div>
+      <div class="hint">רק כדי שנדע איך לדבר איתכם (ועל מי לשאול)</div>
+      <div class="gender">
+        <button onclick="startQuiz('m')"><span class="g-em">🧔🏻‍♂️</span><b>גבר</b></button>
+        <button onclick="startQuiz('f')"><span class="g-em">🧕🏻</span><b>אישה</b></button>
+      </div>
     </section>
 
     <!-- QUESTIONS -->
@@ -176,158 +186,190 @@ footer a{color:var(--green-d); font-weight:600}
     <section class="screen" id="s-res">
       <div class="big" id="bigline">וואלאק מהמם! 🤩</div>
       <div class="sub" id="subline"></div>
-      <div class="score"><b id="scoreNum">0</b><span>אנשים שכבר שלובים בך</span></div>
+      <div class="score"><b id="scoreNum">0</b><span>אנשים שכבר שלובים בכם</span></div>
       <ul class="conn" id="conn"></ul>
       <div class="verdict" id="verdict"></div>
-      <button class="btn" onclick="share()">🔗 תשתף שיקנאו בקבוצה</button>
+      <button class="btn" onclick="share()">🔗 שתפו שיקנאו בקבוצה</button>
       <button class="btn ghost" onclick="location.reload()">↺ עוד סבב, אני מכיר עוד אנשים</button>
     </section>
   </div>
 
   <footer>
-    <p>אתר הומוריסטי לגמרי — לא באמת שמרנו לך את הישיבה 🙏<br>
+    <p>אתר הומוריסטי לגמרי — לא באמת שמרנו לכם את הישיבה 🙏<br>
     בהשראת <a href="https://he.wikipedia.org/wiki/%D7%97%D7%95%D7%A7_%D7%93%D7%AA%D7%99%D7%99%D7%9D_%D7%A9%D7%9C%D7%95%D7%91%D7%99%D7%9D" target="_blank" rel="noopener">חוק דתיים שלובים</a> ובאהבה ל<b>הירוקה בעופרים</b> 🌿</p>
-    <p class="disc">כל הנתונים נשארים אצלך בדפדפן. הצפון והמעיינות — עדיין מסתורין.</p>
+    <p class="disc">כל הנתונים נשארים אצלכם בדפדפן. הצפון והמעיינות — עדיין מסתורין.</p>
   </footer>
 </div>
 
 <script>
-/* ---------- questions ---------- */
-const Q = [
-  { key:'yeshiva', emoji:'📖', q:'איפה למדת? ישיבה / מדרשה', hint:'תיכונית, גבוהה, הסדר — מה שהלב אומר',
-    ph:'למשל: ישיבת הר עציון', chips:['הר עציון','מרכז הרב','כרם ביבנה','שעלבים','אור עציון','מדרשת עין הנצי״ב'] },
-  { key:'shevet', emoji:'🧡', q:'איזה שבט בבני עקיבא היית?', hint:'גם אם לא באת כל שבת, זה נספר',
-    ph:'למשל: שבט מבוא', chips:['נצח','מבוא','לפיד','מגל','אורים','יובלים'] },
-  { key:'shnat', emoji:'🎒', q:'מכינה / שנת שירות?', hint:'שנה שעיצבה אותך (ואת כל האנקדוטות שלך)',
-    ph:'למשל: מכינת עלי / ש״ש בערד', chips:['עלי','בית יתיר','שנת שירות בעיר','גרעין תורני','לא עשיתי, ישר צבא'] },
-  { key:'wife', emoji:'💍', q:'איפה אשתך עשתה שירות?', hint:'שירות לאומי / צבא — הכל נחשב',
-    ph:'למשל: ש״ל בבית חולים שערי צדק', chips:['בית חולים','פנימייה','בית ספר','אולפנה','חינוך מיוחד','עדיין רווק/ה'] },
-  { key:'spring', emoji:'💦', q:'באיזה מעיין בצפון היית לאחרונה?', hint:'נו, הזה עם המים הקרים והפיתות',
-    ph:'למשל: עין תינה / הבניאס', chips:['עין תינה','הבניאס','נחל עמוד','עין קשתות','נחל דישון','מי כמוני זוכר'] },
-];
+/* ---------- question bank (gender-aware) ---------- */
+function buildQuestions(g){
+  const man = g==='m';
+  return [
+    { key:'tichon', emoji:'📖',
+      q: man ? 'איפה היית בישיבה תיכונית?' : 'באיזו אולפנה היית?',
+      hint:'שנות הנעורים, החולצה הלבנה והשירים בהיכל',
+      ph: man ? 'למשל: ישיבה תיכונית נתיב מאיר' : 'למשל: אולפנת צביה',
+      chips: man ? ['נתיב מאיר','אמי״ת','אור עציון','מקור חיים','נחלים'] : ['צביה','אמי״ת','להב״ה','אור תורה','סגולה'] },
 
-let step = 0;
-const answers = {};
+    { key:'gvoha', emoji:'🎓',
+      q: man ? 'ואיפה היית בהסדר / גבוהה?' : 'ובאיזו מדרשה היית?',
+      hint: man ? 'שם באמת נהיית מי שאתה (ואיפה שכחת סוודר)' : 'שנת המדרשה ששינתה לך את הראש',
+      ph: man ? 'למשל: ישיבת הר עציון' : 'למשל: מדרשת עין הנצי״ב',
+      chips: man ? ['הר עציון','מרכז הרב','כרם ביבנה','שעלבים','עתניאל','ירוחם'] : ['עין הנצי״ב','מגדל עוז','נשמת','לינדנבאום','אורות'] },
 
-function go(to){
-  if(to===1){ show('s-q'); render(); }
+    { key:'shevet', emoji:'🧡',
+      q:'איזה שבט בבני עקיבא היית?',
+      hint:'גם אם לא הגעת כל שבת — זה נספר',
+      ph:'למשל: שבט מבוא',
+      chips:['נצח','מבוא','לפיד','מגל','אורים','יובלים'] },
+
+    { key:'mechina', emoji:'🎒',
+      q: man ? 'מכינה / שנת שירות?' : 'שנת שירות / התנדבות?',
+      hint:'השנה שעליה אתם מספרים בכל ארוחת שבת',
+      ph: man ? 'למשל: מכינת עלי' : 'למשל: שנת שירות בעיר',
+      chips: man ? ['עלי','בית יתיר','שנת שירות בעיר','גרעין תורני','לא, ישר צבא'] : ['שנת שירות','גרעין תורני','בת שירות','לא עשיתי'] },
+
+    { key:'spouse', emoji:'💍',
+      q: man ? 'איפה אשתך עשתה שירות?' : 'איפה בעלך היה בשירות?',
+      hint: man ? 'שירות לאומי / צבא — הכל נחשב' : 'הסדר / צבא — ספרו איפה',
+      ph: man ? 'למשל: ש״ל בבית חולים שערי צדק' : 'למשל: ישיבת הסדר + גולני',
+      chips: man ? ['בית חולים','פנימייה','בית ספר','אולפנה','חינוך מיוחד','עדיין רווק'] : ['ישיבת הסדר','מכינה + צבא','גולני','שריון','חיל האוויר','עדיין רווקה'] },
+
+    { key:'spring', emoji:'💦',
+      q:'באיזה מעיין בצפון היית לאחרונה?',
+      hint:'נו, הזה עם המים הקרים, הפיתות והתמונה על סלע',
+      ph:'למשל: עין תינה / הבניאס',
+      chips:['עין תינה','הבניאס','נחל עמוד','עין קשתות','נחל דישון','מי כמוני זוכר'] },
+  ];
 }
+
+let Q=[], step=0, gender='m';
+const answers={};
+
 function show(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
 }
+function startQuiz(g){
+  gender=g; Q=buildQuestions(g); step=0;
+  show('s-q'); render();
+}
 function render(){
-  const q = Q[step];
-  document.getElementById('bar').style.width = (step/Q.length*100)+'%';
-  document.getElementById('qcount').textContent = 'שאלה '+(step+1)+' מתוך '+Q.length;
-  document.getElementById('qtext').innerHTML = q.q+' <span class="emoji">'+q.emoji+'</span>';
-  document.getElementById('qhint').textContent = q.hint;
-  const inp = document.getElementById('qinput');
-  inp.value = answers[q.key] || '';
-  inp.placeholder = q.ph;
-  inp.focus();
-  const chips = document.getElementById('qchips');
-  chips.innerHTML='';
-  q.chips.forEach(c=>{
-    const b=document.createElement('button');
-    b.className='chip'; b.textContent=c;
-    b.onclick=()=>{ inp.value=c; inp.focus(); };
-    chips.appendChild(b);
-  });
-  document.getElementById('qnext').textContent = step===Q.length-1 ? 'גלה כמה אני שלוב 🔮' : 'הבא ←';
+  const q=Q[step];
+  document.getElementById('bar').style.width=(step/Q.length*100)+'%';
+  document.getElementById('qcount').textContent='שאלה '+(step+1)+' מתוך '+Q.length;
+  document.getElementById('qtext').innerHTML=q.q+' <span class="emoji">'+q.emoji+'</span>';
+  document.getElementById('qhint').textContent=q.hint;
+  const inp=document.getElementById('qinput');
+  inp.value=answers[q.key]||''; inp.placeholder=q.ph; inp.focus();
+  const chips=document.getElementById('qchips'); chips.innerHTML='';
+  q.chips.forEach(c=>{ const b=document.createElement('button');
+    b.className='chip'; b.textContent=c; b.onclick=()=>{inp.value=c; inp.focus();}; chips.appendChild(b); });
+  document.getElementById('qnext').textContent = step===Q.length-1 ? 'גלו כמה אני שלוב 🔮' : 'הבא ←';
 }
 function next(){
-  const q = Q[step];
-  const v = document.getElementById('qinput').value.trim();
-  answers[q.key] = v || 'סוד';
+  const q=Q[step];
+  answers[q.key]=document.getElementById('qinput').value.trim()||'סוד';
   step++;
-  if(step<Q.length){ render(); }
+  if(step<Q.length) render();
   else{ document.getElementById('bar').style.width='100%'; calculate(); }
 }
 document.getElementById('qinput').addEventListener('keydown',e=>{ if(e.key==='Enter') next(); });
 
-/* ---------- calculation (deterministic-ish from answers, feels alive) ---------- */
+/* ---------- calculation ---------- */
 function seedRand(str){
   let h=2166136261;
   for(let i=0;i<str.length;i++){ h^=str.charCodeAt(i); h=Math.imul(h,16777619); }
   return function(){ h+=0x6D2B79F5; let t=h; t=Math.imul(t^t>>>15,t|1); t^=t+Math.imul(t^t>>>7,t|61); return ((t^t>>>14)>>>0)/4294967296; };
 }
 function pick(rnd,min,max){ return Math.floor(rnd()*(max-min+1))+min; }
+function has(v,w){ return v && v.indexOf(w)>-1; }
 
-const LOADS = [
+const LOADS=[
   'מפעיל את חוק דתיים שלובים…',
   'סורק את כל קבוצות הוואטסאפ של השבט…',
   'מצליב עם רשימת בוגרי הישיבה…',
   'שואל את הרב אם הוא מכיר…',
-  'בודק מי היה איתך בטיול השנתי…',
+  'בודק מי היה איתכם בטיול השנתי…',
   'מחשב כמה מעלות הפרדה (בערך אפס)…'
 ];
-
 function calculate(){
   show('s-load');
-  let i=0;
-  const el=document.getElementById('loadmsg');
-  el.textContent=LOADS[0];
+  let i=0; const el=document.getElementById('loadmsg'); el.textContent=LOADS[0];
   const iv=setInterval(()=>{ i++; if(i<LOADS.length) el.textContent=LOADS[i]; },620);
   setTimeout(()=>{ clearInterval(iv); reveal(); }, LOADS.length*620+250);
 }
 
 function reveal(){
-  const rnd = seedRand(Object.values(answers).join('|')||'שלוב');
-  const a = answers;
-  const items = [
-    { ic:'📖', n:pick(rnd,2,5), t:'שלמדו איתך ב', ref:a.yeshiva, tail:'— אחד מהם עוד חייב לך סידור' },
-    { ic:'🧡', n:pick(rnd,3,6), t:'מ', tail:' בבני עקיבא, גדלתם על אותן מדריכות', ref:'שבט '+a.shevet, mode:'shevet' },
-    { ic:'💍', n:pick(rnd,1,2), t:'שעשו שירות איפה שאשתך —', ref:a.wife, tail:'"רגע, אתן לא מכירות?!"' },
-    { ic:'💦', n:pick(rnd,2,4), t:'שפגשת פעם ב', ref:a.spring, tail:'(המעיין לא משקר)' },
-  ];
-  // optional shnat bonus
-  if(a.shnat && a.shnat!=='סוד' && a.shnat!=='לא עשיתי, ישר צבא'){
-    items.splice(2,0,{ ic:'🎒', n:pick(rnd,1,3), t:'מהמכינה/ש״ש שלך ב', ref:a.shnat, tail:'עדיין בקבוצה הפעילה מ־2011' });
+  const a=answers, man=gender==='m';
+  const rnd=seedRand(Object.values(a).join('|')||'שלוב');
+  const items=[];
+
+  items.push({ ic:'📖', n:pick(rnd,2,5),
+    t: man?'שלמדו איתך בישיבה התיכונית ':'שהיו איתך באולפנה ',
+    ref:a.tichon, tail:'— אחת עדיין חייבת לך מחברת' });
+
+  items.push({ ic:'🎓', n:pick(rnd,3,6),
+    t: man?'מהישיבה / הסדר ':'מהמדרשה ',
+    ref:a.gvoha, tail:'ואחד מהם עוד חייב לך סידור' });
+
+  items.push({ ic:'🧡', n:pick(rnd,3,6),
+    t:'מ', ref:'שבט '+a.shevet, tail:' בבני עקיבא — גדלתם על אותן מדריכות' });
+
+  if(a.mechina && a.mechina!=='סוד' && !has(a.mechina,'לא')){
+    items.push({ ic:'🎒', n:pick(rnd,1,3),
+      t: man?'מהמכינה / ש״ש שלך ':'מהשירות / ההתנדבות ',
+      ref:a.mechina, tail:'עדיין בקבוצה הפעילה מ־2011' });
   }
-  const total = items.reduce((s,x)=>s+x.n,0);
 
-  const subs = ['חוק דתיים שלובים בעבודה מלאה.','אתה בעצם כבר גר פה, רק בלי המפתחות.','המרחק בינך לשכונה: מכר אחד.'];
-  document.getElementById('subline').textContent = subs[Math.floor(rnd()*subs.length)];
+  if(has(a.spouse,'רווק')){
+    items.push({ ic:'💘', n:pick(rnd,2,4),
+      t:'שכבר יש להם רעיון לשידוך בשבילך', ref:'', tail:'"רגע, אתה לא מכיר את..."' });
+  }else{
+    items.push({ ic:'💍', n:pick(rnd,1,2),
+      t: man?'שעשו שירות בדיוק איפה שאשתך — ':'שהיו בשירות בדיוק איפה שבעלך — ',
+      ref:a.spouse, tail:'"רגע, אתן לא מכירות?!"' });
+  }
 
-  // build list
+  // המעיין — הגאג המקורי
+  items.push({ ic:'💦', n:pick(rnd,3,4),
+    t:'שפגשת פעם במעיין ', ref:a.spring, tail:'בצפון. (לגבי המעיין אנחנו לא באמת יודעים — אבל זה מן הסתם נכון 😅)' });
+
+  const total=items.reduce((s,x)=>s+x.n,0);
+
+  const subs=['חוק דתיים שלובים בעבודה מלאה.','אתם בעצם כבר גרים פה, רק בלי המפתחות.','המרחק ביניכם לשכונה: מכר אחד.'];
+  document.getElementById('subline').textContent=subs[Math.floor(rnd()*subs.length)];
+
   const ul=document.getElementById('conn'); ul.innerHTML='';
   items.forEach((x,idx)=>{
-    const refTxt = (x.ref && x.ref!=='סוד') ? x.ref : (x.mode==='shevet'?'השבט שלך':'המקום שלך');
-    const li=document.createElement('li');
-    li.style.animationDelay=(idx*0.12)+'s';
-    li.innerHTML = '<span class="ic">'+x.ic+'</span><span class="tx"><span class="n">'+x.n+' אנשים</span> '
-      + x.t + ' <b>'+refTxt+'</b> '+ (x.tail||'') +'</span>';
+    const refTxt=(x.ref && x.ref!=='סוד')?x.ref:'';
+    const li=document.createElement('li'); li.style.animationDelay=(idx*0.12)+'s';
+    li.innerHTML='<span class="ic">'+x.ic+'</span><span class="tx"><span class="n">'+x.n+' אנשים</span> '
+      + x.t + (refTxt?'<b>'+refTxt+'</b> ':'') + (x.tail||'') + '</span>';
     ul.appendChild(li);
   });
 
-  // verdict
   let v;
-  if(total>=15) v='<b>מדד שלובוּת: אגדי 🏆</b><br>אחי, אתה כבר ועד השכונה. תתקשר לקבלן, הם מחכים לך עם קוגל.';
-  else if(total>=10) v='<b>מדד שלובוּת: גבוה מאוד 🔥</b><br>עוד קידוש אחד ואתה בקבוצת "שכנים הירוקה בעופרים".';
-  else v='<b>מדד שלובוּת: מבטיח 🌱</b><br>יש בסיס מצוין. שבת אחת פה ואתה מכיר את כולם.';
+  if(total>=17) v='<b>מדד שלובוּת: אגדי 🏆</b><br>אחי, אתם כבר ועד השכונה. תתקשרו לקבלן, הם מחכים לכם עם קוגל.';
+  else if(total>=12) v='<b>מדד שלובוּת: גבוה מאוד 🔥</b><br>עוד קידוש אחד ואתם בקבוצת "שכנים · הירוקה בעופרים".';
+  else v='<b>מדד שלובוּת: מבטיח 🌱</b><br>יש בסיס מצוין. שבת אחת פה ואתם מכירים את כולם.';
   document.getElementById('verdict').innerHTML=v;
 
   show('s-res');
-  // animate score counter
   const sc=document.getElementById('scoreNum'); let c=0;
   const t=setInterval(()=>{ c++; sc.textContent=c; if(c>=total){clearInterval(t); confetti();} }, 900/total);
 }
 
-/* ---------- share ---------- */
 function share(){
   const total=document.getElementById('scoreNum').textContent;
   const txt='וואלאק גיליתי שיש '+total+' אנשים שכבר שלובים בי בהירוקה בעופרים 🌿 חוק דתיים שלובים לא טועה! תבדקו את עצמכם:';
   const url=location.href;
   if(navigator.share){ navigator.share({title:'דתיים שלובים · הירוקה בעופרים',text:txt,url}).catch(()=>{}); }
-  else{
-    const wa='https://wa.me/?text='+encodeURIComponent(txt+' '+url);
-    window.open(wa,'_blank');
-  }
+  else{ window.open('https://wa.me/?text='+encodeURIComponent(txt+' '+url),'_blank'); }
 }
 
-/* ---------- confetti ---------- */
 function confetti(){
   const cv=document.getElementById('cf'), ctx=cv.getContext('2d');
   cv.width=innerWidth; cv.height=innerHeight;
