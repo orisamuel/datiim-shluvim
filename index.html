@@ -122,6 +122,9 @@ input::placeholder{color:#b3ab92}
   font-size:24px; background:#fff; box-shadow:0 4px 10px rgba(0,0,0,.06)}
 .conn li .tx{flex:1; font-size:15.5px; line-height:1.4}
 .conn li .tx .n{font-weight:900; color:var(--green); font-size:19px}
+.conn li.miss{background:#f6f5f0; border-color:#e7e3d6; border-style:dashed}
+.conn li.miss .ic{background:#f0eee6; box-shadow:none}
+.conn li.miss .tx{color:var(--ink-soft); font-size:14.5px; font-style:italic}
 @keyframes slide{to{opacity:1; transform:none}}
 
 .verdict{background:linear-gradient(180deg,#fff8e5,#fff2cf); border:1.5px solid #f0d98a;
@@ -257,12 +260,42 @@ function buildQuestions(g){
       skipIf:(a)=> !a.mil_type || a.mil_type.trim().indexOf('לא')===0 });
   }
 
+  list.push({ key:'degree', emoji:'📜',
+    q:'איפה עשית תואר?',
+    hint:'או שאתה עדיין "אחרי ישיבה, לפני שמחליטים"',
+    ph:'למשל: בר אילן / מכללת הרצוג',
+    chips:['בר אילן','מכללת הרצוג','אורות ישראל','אריאל','הטכניון','לא עשיתי תואר'] });
+
+  list.push({ key:'yishuv', emoji:'🏡',
+    q:'ואיפה גדלת?',
+    hint:'העיר או היישוב של הילדות',
+    ph:'למשל: פתח תקווה / קרני שומרון',
+    chips:['גוש עציון','פתח תקווה','רעננה','בית שמש','קרני שומרון','ירושלים','לא גדלתי בארץ'] });
+
+  list.push({ key:'rav', emoji:'🙏',
+    q:'לאיזה רב אתה הכי מתחבר?',
+    hint:'רק בשביל הווייב — בלי מחלוקות בבקשה',
+    ph:'למשל: הרב של הישיבה',
+    chips:['הרב מהישיבה','רב היישוב','רב מהיוטיוב','מגיד שיעור בדף היומי','שומר לעצמי'] });
+
+  list.push({ key:'trip', emoji:'✈️',
+    q: man ? 'לאן טסת אחרי הצבא?' : 'לאן טסת אחרי השירות?',
+    hint:'הטרק הגדול, התמונות עם מכנסי הפשתן',
+    ph:'למשל: הודו / דרום אמריקה',
+    chips:['הודו','דרום אמריקה','תאילנד','ניו זילנד','לא טסתי'] });
+
   list.push({ key:'spouse', emoji:'💍',
     q: man ? 'איפה אשתך עשתה שירות?' : 'איפה בעלך היה בשירות?',
     hint: man ? 'שירות לאומי / צבא — הכל נחשב' : 'הסדר / צבא — ספרו איפה',
     ph: man ? 'למשל: ש״ל בבית חולים שערי צדק' : 'למשל: ישיבת הסדר + גולני',
     chips: man ? ['בית חולים','פנימייה','בית ספר','אולפנה','חינוך מיוחד','עדיין רווק']
                : ['ישיבת הסדר','מכינה + צבא','גולני','שריון','חיל האוויר','עדיין רווקה'] });
+
+  list.push({ key:'gan', emoji:'👶',
+    q:'יש לך ילדים בגן או בבית ספר?',
+    hint:'אם כן — כבר יש לך חברים בשכונה בלי לדעת',
+    ph:'כן / עדיין לא',
+    chips:['כן, בגן','כן, בבית ספר','עדיין תינוקות','אין לנו ילדים'] });
 
   return list;
 }
@@ -360,6 +393,20 @@ function reveal(){
     t: isArmy(a)?'ששירתו איתך בצבא ב':'שעשו איתך שירות לאומי ב',
     ref:a.mil_where, tail:' — ונשארתן חברות עד היום' });
 
+  if(!isNone(a.degree)) items.push({ ic:'📜', n:pick(rnd,2,5),
+    t:'שלמדו איתך תואר ב', ref:a.degree, tail:' — ישבתם באותה הרצאה משעממת' });
+
+  if(!isNone(a.yishuv)) items.push({ ic:'🏡', n:pick(rnd,3,6),
+    t:'שכנים לשעבר מ', ref:a.yishuv, tail:' — אמא שלך מכירה את אמא שלהם' });
+
+  // שאלת אווירה — לא מייצרת חיבור
+  if(!isNone(a.rav)) items.push({ flavor:true, ic:'🙏',
+    text:'לגבי הרב — כל השכונה מתחברת אליו, אז זה כבר לא נחשב חיבור מיוחד 😌' });
+
+  // שאלת אווירה — לא מייצרת חיבור
+  if(!isNone(a.trip)) items.push({ flavor:true, ic:'✈️',
+    text:'ובקטע של '+a.trip+' — כולם היו שם באותה שנה, אי אפשר בכלל לספור' });
+
   if(has(a.spouse,'רווק')){
     items.push({ ic:'💘', n:pick(rnd,2,4),
       t:'שכבר יש להם רעיון לשידוך בשבילכם', ref:'',
@@ -370,23 +417,33 @@ function reveal(){
       ref:a.spouse, tail: man?'. "רגע, אתן לא מכירות?!"':'. "רגע, אתם לא מכירים?!"' });
   }
 
+  if(a.gan && (a.gan.indexOf('גן')>-1 || a.gan.indexOf('ספר')>-1 || a.gan.indexOf('כית')>-1))
+    items.push({ ic:'👶', n:pick(rnd,2,4),
+      t:'מהגן / הכיתה של הילדים שלך', ref:'',
+      tail:' — כבר סימנתם וי על ההסעה המשותפת' });
+
   // המעיין — הגאג הקבוע (מופיע רק כאן, לא כשאלה)
   items.push({ ic:'💦', n:pick(rnd,3,4),
     t:'שפגשת פעם באיזה מעיין בצפון', ref:'',
     tail:'. (לגבי המעיין אנחנו לא באמת יודעים — אבל זה מן הסתם נכון)' });
 
-  const total=items.reduce((s,x)=>s+x.n,0);
+  const total=items.filter(x=>!x.flavor).reduce((s,x)=>s+x.n,0);
 
   const subs=['חוק דתיים שלובים בעבודה מלאה.','אתם בעצם כבר גרים פה, רק בלי המפתחות.','המרחק ביניכם לשכונה: מכר אחד.'];
   document.getElementById('subline').textContent=subs[Math.floor(rnd()*subs.length)];
 
   const ul=document.getElementById('conn'); ul.innerHTML='';
   items.forEach((x,idx)=>{
-    const refTxt=(x.ref && x.ref!=='סוד')?x.ref:'';
-    const noun = x.n===1 ? 'בן אדם אחד' : x.n+' אנשים';
     const li=document.createElement('li'); li.style.animationDelay=(idx*0.12)+'s';
-    li.innerHTML='<span class="ic">'+x.ic+'</span><span class="tx"><span class="n">'+noun+'</span> '
-      + x.t + (refTxt?'<b>'+refTxt+'</b>':'') + (x.tail||'') + '</span>';
+    if(x.flavor){
+      li.className='miss';
+      li.innerHTML='<span class="ic">'+x.ic+'</span><span class="tx">'+x.text+'</span>';
+    }else{
+      const refTxt=(x.ref && x.ref!=='סוד')?x.ref:'';
+      const noun = x.n===1 ? 'בן אדם אחד' : x.n+' אנשים';
+      li.innerHTML='<span class="ic">'+x.ic+'</span><span class="tx"><span class="n">'+noun+'</span> '
+        + x.t + (refTxt?'<b>'+refTxt+'</b>':'') + (x.tail||'') + '</span>';
+    }
     ul.appendChild(li);
   });
 
